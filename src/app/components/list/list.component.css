@@ -1,0 +1,14 @@
+mat-list {
+  height: calc(100% - 64px);
+  overflow: auto;
+}
+
+mat-list-item {
+  cursor: pointer;
+  padding-top: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+mat-list-item:hover {
+
+}

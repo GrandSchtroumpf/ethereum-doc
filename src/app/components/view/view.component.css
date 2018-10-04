@@ -1,0 +1,22 @@
+:host {
+  overflow: hidden;
+}
+
+main {
+  height: calc(100% - 64px);
+  overflow: auto;
+}
+
+mat-card {
+  margin: 15px;
+}
+
+mat-card-content {
+  padding-top: 20px;
+}
+
+
+code {
+  padding: 15px;
+  font-size: 0.8rem;
+}

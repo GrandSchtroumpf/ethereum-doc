@@ -1,0 +1,16 @@
+.method-name {
+  font-size: 1rem;
+}
+
+mat-card-content {
+  padding-top: 25px;
+}
+
+code {
+  padding: 15px;
+  font-size: 0.8rem;
+}
+
+table {
+  width: 100%;
+}

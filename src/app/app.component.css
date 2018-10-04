@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  height: 100%;
+  background-color:rgb(250, 250, 250);
+  overflow: hidden;
+}
+
+mat-toolbar {
+  background-color: rgb(25, 35, 45);
+  color: rgb(190, 190, 200);
+}
+
+mat-icon {
+  color: rgb(190, 190, 200);
+}

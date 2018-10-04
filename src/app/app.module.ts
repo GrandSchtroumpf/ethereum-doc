@@ -1,14 +1,41 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+import { HighlightModule } from 'ngx-highlightjs';
+import { MaterialModule } from './material.module';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { environment } from './../environments/environment';
 
 import { AppComponent } from './app.component';
+import { ContractNamePipe } from './pipes/contract-name.pipe';
+import { ListComponent } from './components/list/list.component';
+import { ViewComponent } from './components/view/view.component';
+import { MethodComponent } from './components/method/method.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ContractNamePipe,
+    ListComponent,
+    ViewComponent,
+    MethodComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    FormsModule,
+    HighlightModule.forRoot({ theme: 'vs2015' }),
+    RouterModule.forRoot([
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
+      { path: 'list', component: ListComponent },
+      { path: ':name', component: ViewComponent }
+    ]),
+    environment.production ? [] : AkitaNgDevtools.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
