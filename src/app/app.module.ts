@@ -11,6 +11,7 @@ import { environment } from './../environments/environment';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { AppComponent } from './app.component';
 import { ContractNamePipe } from './pipes/contract-name.pipe';
@@ -18,6 +19,7 @@ import { ListComponent } from './components/list/list.component';
 import { ViewComponent } from './components/view/view.component';
 import { MethodComponent } from './components/method/method.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { AddressesComponent } from './components/addresses/addresses.component';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { AuthComponent } from './components/auth/auth.component';
     ListComponent,
     ViewComponent,
     MethodComponent,
-    AuthComponent
+    AuthComponent,
+    AddressesComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import { AuthComponent } from './components/auth/auth.component';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     HighlightModule.forRoot({ theme: 'vs2015' }),
     RouterModule.forRoot([
       { path: '', redirectTo: 'list', pathMatch: 'full' },
@@ -45,6 +49,7 @@ import { AuthComponent } from './components/auth/auth.component';
     environment.production ? [] : AkitaNgDevtools.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddressesComponent]
 })
 export class AppModule { }

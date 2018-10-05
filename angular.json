@@ -127,41 +127,6 @@
           }
         }
       }
-    },
-    "ethereum-doc-auth": {
-      "root": "projects/ethereum-doc-auth",
-      "sourceRoot": "projects/ethereum-doc-auth/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/ethereum-doc-auth/tsconfig.lib.json",
-            "project": "projects/ethereum-doc-auth/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/ethereum-doc-auth/src/test.ts",
-            "tsConfig": "projects/ethereum-doc-auth/tsconfig.spec.json",
-            "karmaConfig": "projects/ethereum-doc-auth/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ethereum-doc-auth/tsconfig.lib.json",
-              "projects/ethereum-doc-auth/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
     }
   },
   "defaultProject": "ethereum-doc"

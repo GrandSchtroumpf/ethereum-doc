@@ -1,0 +1,13 @@
+<h2 class="mat-title" mat-dialog-title>Save your documentation</h2>
+<p class="mat-subheading-1" mat-dialog-subtitle>Add the addresses of you contract if any.</p>
+
+<div class="forms" mat-dialog-content fxLayout="column" fxLayoutAlign="space-around center">
+    <mat-form-field *ngFor="let address of addresses | keyvalue">
+      <input matInput [placeholder]="address.key" [(ngModel)]="address.value">
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="center center">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="addresses" cdkFocusInitial>Save</button>
+</div>

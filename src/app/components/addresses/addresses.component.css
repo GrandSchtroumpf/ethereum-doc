@@ -1,0 +1,17 @@
+h2 {
+  margin: 5px 0;
+}
+p {
+  opacity: 0.8;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.forms {
+  margin: auto;
+}
+
+mat-form-field {
+  width: 100%;
+  font-size: 0.8rem;
+}

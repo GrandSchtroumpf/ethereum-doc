@@ -4,7 +4,7 @@ import { ContractState, ContractStore } from './contract.store';
 import { ContractDoc } from './../models/doc';
 
 import { QueryEntity } from '@datorama/akita';
-import { withLatestFrom, map, filter } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 ​
 @Injectable({ providedIn: 'root' })
 export class ContractQuery extends QueryEntity<ContractState, Contract> {
@@ -55,6 +55,17 @@ export class ContractQuery extends QueryEntity<ContractState, Contract> {
       return { name, payable, type, constant, stateMutability, ...this.getDocForMethod(def, methodDoc) };
     });
     const { title, author } = metadata.output.devdoc;
-    return { name: (<any>contract).id, title, author, methods};
+    const result = {
+      name: (<any>contract).id,
+      code: contract.code,
+      bytecode: contract.evm.bytecode.object,
+      title,
+      author,
+      methods,
+      abi
+    };
+    // Remove undefined fields
+    Object.keys(result).forEach(key => result[key] === undefined ? delete result[key] : '');
+    return result;
   }
 }

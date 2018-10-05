@@ -1,10 +1,15 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ContractService } from './../../services/contract';
+import { AddressesComponent } from './../addresses/addresses.component';
+import { ABIDefinition } from './../../models/compiler';
 import { ContractStore } from './../../+state/contract.store';
 import { ContractQuery } from './../../+state/contract.query';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ContractDoc } from '../../models/doc';
 import { ActivatedRoute } from '@angular/router';
-import { takeWhile, tap } from 'rxjs/operators';
+import { takeWhile, filter, switchMap } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'contract-view',
@@ -16,11 +21,15 @@ export class ViewComponent implements OnInit, OnDestroy {
   private alive = true;
   public contract$: Observable<ContractDoc>;
   public code: string;
+  public showAbi: boolean;
 
   constructor(
     private store: ContractStore,
     private query: ContractQuery,
-    private route: ActivatedRoute
+    private service: ContractService,
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -37,29 +46,30 @@ export class ViewComponent implements OnInit, OnDestroy {
     this.alive = false;
   }
 
-  private updateCode(name: string) {
-    let abi: string;
-    /*
-    if (this.showAbi && !!this.compiled) {
-      abi = `
-const abi = ${this.compiled.interface};
-const bytecode = '${this.compiled.bytecode}';`;
-    } else {
-      */
-      abi = `
-const abi = [];      // Here goes the ABI of the contract
-const bytecode = ''; // Here goes the bytecode of the contract`;
-    // }
+  private updateCode(name: string, abi?: ABIDefinition[], bytecode?: string) {
+    const abiString = abi ? `const abi = ${JSON.stringify(abi)};` : 'const abi = [];      // Here goes the ABI of the contract';
+    const byteString = abi ? `const bytecode = '${bytecode}';` : 'const bytecode = ""; // Here goes the bytecode of the contract';
     this.code = `const ethers = require('ethers');
 
 const provider = ethers.getDefaultProvider('default');
-${abi}
+${abiString}
+${byteString}
 const ${name}Contract = new ethers.Contract(contractAddress, abi, provider);
     `;
   }
 
-  public deploy() {
-    // Deploy active contract
+  public save(doc: ContractDoc) {
+    const ref = this.dialog.open(AddressesComponent, {width: '80%', data: doc.addresses});
+    ref.afterClosed().pipe(
+      filter(addresses => !!addresses),
+      switchMap(addresses => this.service.save({ ...doc, addresses }))
+    ).subscribe(
+      () => this.snackBar.open('Documentation saved', 'close', { duration: 2000 }),
+      (err) => {
+        console.error(err);
+        this.snackBar.open('Could not save the doc', 'close', { duration: 2000 });
+      }
+    );
   }
 
 }

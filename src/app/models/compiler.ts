@@ -34,9 +34,10 @@ export interface CompilationResult {
 export interface Contract {
   abi: ABIDefinition[];
   devdoc: Devdoc;
-  evm: any;
+  evm: EVMInfos;
   metadata: string;
   userdoc: Userdoc;
+  code?: string;  // This is not in the compiled version of the contract. Only here as an helper
 }
 
 export interface Devdoc {
@@ -56,6 +57,21 @@ export interface Userdoc {
     [methodName: string]: {
       notice: string;
     }
+  };
+}
+
+export interface EVMInfos {
+  bytecode: {
+    linkReferences: any;
+    object: string;
+    opcodes: string;
+    sourceMap: string;
+  };
+  deployedBytecode: {
+    linkReferences: any;
+    object: string;
+    opcodes: string;
+    sourceMap: string;
   };
 }
 

@@ -1,3 +1,5 @@
+import { ABIDefinition } from './compiler';
+
 export interface ContractDoc {
   name?: string;
   code?: string;
@@ -7,6 +9,16 @@ export interface ContractDoc {
   methods: {
     [method: string]: MethodDoc;
   };
+  addresses?: Addresses;
+  abi?: ABIDefinition[];
+  bytecode?: string;
+}
+
+export interface Addresses {
+  ropsten: string;
+  mainnet: string;
+  kovan: string;
+  rinkeby: string;
 }
 
 export interface MethodDoc {
