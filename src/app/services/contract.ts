@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Remix } from './remix';
-import { Contract } from './../models/compiler';
-import { ContractDoc } from './../models/doc';
 import { ContractStore } from './../+state/contract.store';
 
-import { Observable, Subject, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ContractService {
@@ -15,6 +12,10 @@ export class ContractService {
     private remix: Remix
   ) {
     this.remix.compilationResult$.pipe(
+      tap(result => {
+        if (!result.data) { this.remix.request('compiler', 'getCompilationResult'); }
+      }),
+      filter(result => !!result.data),
       map(result => result.data.contracts),
     ).subscribe(contracts => {
       for (const target in contracts) {

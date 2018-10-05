@@ -1,9 +1,12 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <h2>Compiled Contracts</h2>
+  <app-auth></app-auth>
+</mat-toolbar>
+
 <mat-list *ngIf="contracts$ | async as contracts; else noContract">
   <mat-list-item matRipple (click)="select(contract.id)" *ngFor="let contract of contracts">
-    <button mat-icon-button>
-      <mat-icon>arrow_right</mat-icon>
-    </button>
-    <h2>{{ contract.id }}</h2>
+    <h1 mat-line>{{ contract.id }}</h1>
+    <p mat-line *ngIf="contract.devdoc.title">{{ contract.devdoc.title }}</p>
     <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>

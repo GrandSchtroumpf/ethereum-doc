@@ -58,4 +58,8 @@ const ${name}Contract = new ethers.Contract(contractAddress, abi, provider);
     `;
   }
 
+  public deploy() {
+    // Deploy active contract
+  }
+
 }

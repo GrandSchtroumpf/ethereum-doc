@@ -40,6 +40,8 @@ export interface Contract {
 }
 
 export interface Devdoc {
+  title: string;
+  author: string;
   methods: {
     [methodName: string]: {
       details: string;
@@ -49,8 +51,11 @@ export interface Devdoc {
 }
 
 export interface Userdoc {
+  notice: string;
   methods: {
-
+    [methodName: string]: {
+      notice: string;
+    }
   };
 }
 

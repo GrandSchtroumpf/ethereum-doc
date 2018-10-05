@@ -10,6 +10,7 @@ import { withLatestFrom, map, filter } from 'rxjs/operators';
 export class ContractQuery extends QueryEntity<ContractState, Contract> {
 
   public contracts$ = this.selectAll();
+
   public activeContract$ = this.selectActive().pipe(
     filter(contract => !!contract),
     map(contract => this.getDoc(contract))

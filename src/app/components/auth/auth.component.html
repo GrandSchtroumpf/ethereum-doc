@@ -1,0 +1,12 @@
+<div class="loggedIn" *ngIf="user$ | async as user; else loginButton">
+  <img [src]="user.photoURL" [matMenuTriggerFor]="menu" />
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout()">Logout</button>
+  </mat-menu>
+</div>
+
+<ng-template #loginButton>
+  <button mat-icon-button (click)="login()">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</ng-template>

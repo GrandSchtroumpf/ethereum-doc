@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class ListComponent implements OnInit {
 
-  public contracts$: Observable<any>;
+  public contracts$: Observable<Contract[]>;
 
   constructor(private router: Router, private query: ContractQuery) { }
 

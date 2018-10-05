@@ -1,0 +1,15 @@
+:host {
+  height: 60%;
+  display: block;
+}
+
+.loggedIn {
+  display: block;
+  height: 100%;
+}
+
+img {
+  height: 100%;
+  border-radius: 50%;
+  cursor: pointer;
+}

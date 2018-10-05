@@ -9,11 +9,15 @@ import { MaterialModule } from './material.module';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { environment } from './../environments/environment';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 import { AppComponent } from './app.component';
 import { ContractNamePipe } from './pipes/contract-name.pipe';
 import { ListComponent } from './components/list/list.component';
 import { ViewComponent } from './components/view/view.component';
 import { MethodComponent } from './components/method/method.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 
 @NgModule({
@@ -22,13 +26,16 @@ import { MethodComponent } from './components/method/method.component';
     ContractNamePipe,
     ListComponent,
     ViewComponent,
-    MethodComponent
+    MethodComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     HighlightModule.forRoot({ theme: 'vs2015' }),
     RouterModule.forRoot([
       { path: '', redirectTo: 'list', pathMatch: 'full' },

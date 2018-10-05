@@ -10,6 +10,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -26,6 +27,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatListModule,
     MatTableModule,
     MatExpansionModule,
+    MatMenuModule,
     FlexLayoutModule
   ],
   exports: [
@@ -40,6 +42,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatListModule,
     MatTableModule,
     MatExpansionModule,
+    MatMenuModule,
     FlexLayoutModule
   ]
 })

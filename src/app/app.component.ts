@@ -4,8 +4,14 @@ import { ContractService } from './services/contract';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: '<router-outlet></router-outlet>',
+  styles: [`
+  :host {
+    display: block;
+    height: 100%;
+    background-color:rgb(250, 250, 250);
+    overflow: hidden;
+  }`]
 })
 export class AppComponent implements OnInit {
 
