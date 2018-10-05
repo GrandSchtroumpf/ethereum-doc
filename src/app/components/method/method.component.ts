@@ -27,15 +27,50 @@ export class MethodComponent implements OnInit {
     this.code = this.getMethodContent();
   }
 
+  public getType(type: string): string {
+    switch (true) {
+      // Array: Must be first
+      case /\[([0-9]*)\]/.test(type): return 'string';  // TODO : add array specific entry
+      // Tuple
+      case /tuple?/.test(type): return 'string';  // TODO : add tuple specific entry
+      // String
+      case /string?/.test(type): return 'string';
+      // Static Bytes
+      case /bytes?/.test(type): return 'string';  // TODO : add 0x for hex number
+      // Int / Uint
+      case /int?/.test(type): return 'number';
+      // Address
+      case /address?/.test(type): return 'string';  // TODO : Add checksum
+      // Bool
+      case /bool?/.test(type): return 'boolean';
+      default: return 'string';
+    }
+  }
+
+
   public getMethodContent() {
-    const getPlaceholder = type => {
-      switch (type) {
-        case 'string':
-          return '"Lorem Ipsum"';
-        // TODO
-      }
+    const getPlaceholder = (type: string): string => {
+    // Compare true with the result of the cases
+    switch (true) {
+      // Array: Must be first
+      case /\[([0-9]*)\]/.test(type): return '[]';
+      // Tuple
+      case /tuple?/.test(type): return '{}';
+      // String
+      case /string?/.test(type): return 'Lorem Ipsum';
+      // Static Bytes
+      case /bytes?/.test(type): return '0x';
+      // Int / Uint
+      case /int?/.test(type): return '0';
+      // Address
+      case /address?/.test(type): return '0x0000000000000000000000000000000000000000';
+      // Bool
+      case /bool?/.test(type): return 'false';
+      default: return '';
+    }
     };
 
+    /* INPUTS */
     const paramNames = this.method.params.map(param => param.name).join(", ");
     const params = this.method.params
       .map(param => {
@@ -48,7 +83,9 @@ export class MethodComponent implements OnInit {
         return parameter + description;
       })
       .join("\n");
+    const inputs = this.method.params.length > 0 ? `// Inputs\n${params}\n` : '';
 
+    /* OUTPUTS */
     let result: string;
     // If call method
     if (this.method.constant) {
@@ -66,9 +103,6 @@ export class MethodComponent implements OnInit {
       }(${paramNames});`;
     }
 
-    return `// Inputs
-${params}
-// Outputs
-${result}`;
+    return `${inputs}// Outputs\n${result}`;
   }
 }

@@ -12,6 +12,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -30,6 +31,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatExpansionModule,
     MatMenuModule,
     MatTooltipModule,
+    MatCheckboxModule,
     FlexLayoutModule
   ],
   exports: [
@@ -46,6 +48,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatExpansionModule,
     MatMenuModule,
     MatTooltipModule,
+    MatCheckboxModule,
     FlexLayoutModule
   ]
 })

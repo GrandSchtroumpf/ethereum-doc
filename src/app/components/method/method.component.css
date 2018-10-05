@@ -14,3 +14,12 @@ code {
 table {
   width: 100%;
 }
+
+table td.mat-cell {
+  width: 25%;
+  font-size: 0.7rem !important;
+}
+
+table .mat-form-field-infix  {
+  width: 20% !important;
+}

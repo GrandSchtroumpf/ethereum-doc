@@ -3,7 +3,7 @@
       <button mat-icon-button routerLink="/list">
         <mat-icon>keyboard_arrow_left</mat-icon>
       </button>
-      <h2>{{ (contract$ | async).name }}</h2>
+      <h2>{{ (contract$ | async)?.name }}</h2>
   </div>
   <button matTooltip="Deploy this contract (WIP)" mat-icon-button (click)="deploy()">
     <mat-icon>cloud_upload</mat-icon>
