@@ -9,7 +9,7 @@ const initialState = {
 };
 ​
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'contracts' })
+@StoreConfig({ name: 'contracts', idKey: 'name' })
 export class ContractStore extends EntityStore<ContractState, ContractDoc> {
   constructor() {
     super(initialState);
