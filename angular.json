@@ -127,6 +127,125 @@
           }
         }
       }
+    },
+    "contract-doc": {
+      "root": "projects/contract-doc/",
+      "sourceRoot": "projects/contract-doc/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/contract-doc",
+            "index": "projects/contract-doc/src/index.html",
+            "main": "projects/contract-doc/src/main.ts",
+            "polyfills": "projects/contract-doc/src/polyfills.ts",
+            "tsConfig": "projects/contract-doc/tsconfig.app.json",
+            "assets": [
+              "projects/contract-doc/src/favicon.ico",
+              "projects/contract-doc/src/assets"
+            ],
+            "styles": [
+              "projects/contract-doc/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/contract-doc/src/environments/environment.ts",
+                  "with": "projects/contract-doc/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "contract-doc:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "contract-doc:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "contract-doc:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/contract-doc/src/test.ts",
+            "polyfills": "projects/contract-doc/src/polyfills.ts",
+            "tsConfig": "projects/contract-doc/tsconfig.spec.json",
+            "karmaConfig": "projects/contract-doc/karma.conf.js",
+            "styles": [
+              "projects/contract-doc/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/contract-doc/src/favicon.ico",
+              "projects/contract-doc/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/contract-doc/tsconfig.app.json",
+              "projects/contract-doc/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "contract-doc-e2e": {
+      "root": "projects/contract-doc-e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/contract-doc-e2e/protractor.conf.js",
+            "devServerTarget": "contract-doc:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "contract-doc:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/contract-doc-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ethereum-doc"

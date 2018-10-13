@@ -1,8 +1,9 @@
-:host {
+main {
   overflow: hidden;
+  height: 100%;
 }
 
-main {
+section {
   height: calc(100% - 64px);
   overflow: auto;
 }

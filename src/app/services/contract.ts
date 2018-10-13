@@ -13,7 +13,6 @@ export class ContractService {
 
   constructor(
     private store: ContractStore,
-    private query: ContractQuery,
     private db: AngularFirestore,
     private auth: Auth,
     private remix: Remix
@@ -36,6 +35,7 @@ export class ContractService {
     });
   }
 
+  /** Angular firestore save  */
   public save(doc: ContractDoc) {
     return this.auth.user$.pipe(
       tap(user => !user ? this.auth.loginAlert() : true),

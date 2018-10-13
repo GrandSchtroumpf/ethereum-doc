@@ -37,8 +37,12 @@ export class ContractQuery extends QueryEntity<ContractState, Contract> {
    * @param contract The compiled contract to get the documentation from
    */
   private getDoc(contract: Contract): ContractDoc {
-    const metadata = JSON.parse(contract.metadata);
-    const abi = metadata.output.abi;
+    const metadata = contract.metadata ? JSON.parse(contract.metadata) : {};
+    const output = metadata.output;
+
+    const abi = output ? output.abi : [];
+    const { title, author } = output ? output.devdoc : { title: undefined, author: undefined };
+
     // Get doc from all methods
     const methods = abi.map(def => {
       const {name, payable, type, constant, stateMutability } = def;
@@ -54,7 +58,7 @@ export class ContractQuery extends QueryEntity<ContractState, Contract> {
       }
       return { name, payable, type, constant, stateMutability, ...this.getDocForMethod(def, methodDoc) };
     });
-    const { title, author } = metadata.output.devdoc;
+
     const result = {
       name: (<any>contract).id,
       code: contract.code,
