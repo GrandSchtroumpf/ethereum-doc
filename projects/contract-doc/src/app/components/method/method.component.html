@@ -45,6 +45,33 @@
         <th mat-header-cell *matHeaderCellDef> Description </th>
         <td mat-cell *matCellDef="let param"> {{param.description}} </td>
       </ng-container>
+      <!-- Input Column -->
+      <ng-container matColumnDef="input">
+        <th mat-header-cell *matHeaderCellDef> Input </th>
+        <td mat-cell *matCellDef="let param; let i = index"  [ngSwitch]="getType(param.type)">
+           <!-- String -->
+          <mat-form-field *ngSwitchCase="'string'">
+            <input matInput
+            type="text"
+            (blur)="updateFile()"
+            (keydown.enter)="updateFile()"
+            [(ngModel)]="param.value"
+            [placeholder]="param.type" />
+          </mat-form-field>
+          <!-- Number -->
+          <mat-form-field *ngSwitchCase="'number'">
+            <input matInput
+            type="number"
+            (blur)="updateFile()"
+            (keydown.enter)="updateFile()"
+            [(ngModel)]="param.value"
+            [placeholder]="param.type" />
+          </mat-form-field>
+
+          <!-- Boolean -->
+          <mat-checkbox *ngSwitchCase="'boolean'" [(ngModel)]="param.value">{{ param.name }}</mat-checkbox>
+        </td>
+      </ng-container>
     </table>
     <!--
     <mat-card-actions>

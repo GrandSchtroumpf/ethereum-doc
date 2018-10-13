@@ -15,7 +15,7 @@ export class MethodComponent implements OnInit {
   public code: string;
   public result: any;
   public params: any[];
-  public Input = ['name', 'type', 'description'];
+  public paramColumns = ['name', 'type', 'description', 'input'];
 
   constructor() {}
 
@@ -26,6 +26,27 @@ export class MethodComponent implements OnInit {
   public updateFile() {
     this.code = this.getMethodContent();
   }
+
+  public getType(type: string): string {
+    switch (true) {
+      // Array: Must be first
+      case /\[([0-9]*)\]/.test(type): return 'string';  // TODO : add array specific entry
+      // Tuple
+      case /tuple?/.test(type): return 'string';  // TODO : add tuple specific entry
+      // String
+      case /string?/.test(type): return 'string';
+      // Static Bytes
+      case /bytes?/.test(type): return 'string';  // TODO : add 0x for hex number
+      // Int / Uint
+      case /int?/.test(type): return 'number';
+      // Address
+      case /address?/.test(type): return 'string';  // TODO : Add checksum
+      // Bool
+      case /bool?/.test(type): return 'boolean';
+      default: return 'string';
+    }
+  }
+
 
   public getMethodContent() {
     const getPlaceholder = (type: string): string => {
