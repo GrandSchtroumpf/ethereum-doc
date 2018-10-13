@@ -46,7 +46,7 @@ export class ViewComponent implements OnInit, OnDestroy {
     this.alive = false;
   }
 
-  private updateCode(name: string, abi?: ABIDefinition[], bytecode?: string) {
+  public updateCode(name: string, abi?: ABIDefinition[], bytecode?: string) {
     const abiString = abi ? `const abi = ${JSON.stringify(abi)};` : 'const abi = [];      // Here goes the ABI of the contract';
     const byteString = abi ? `const bytecode = '${bytecode}';` : 'const bytecode = ""; // Here goes the bytecode of the contract';
     this.code = `const ethers = require('ethers');

@@ -1,3 +1,9 @@
-<p>
-  list works!
-</p>
+<mat-toolbar>
+  <h1>List</h1>
+</mat-toolbar>
+
+<section>
+  <mat-list *ngFor="let contract of contracts$ | async">
+    <mat-list-item [routerLink]="['', contract.name]">{{ contract.name }}</mat-list-item>
+  </mat-list>
+</section>

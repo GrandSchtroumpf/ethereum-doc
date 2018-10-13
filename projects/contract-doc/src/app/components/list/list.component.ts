@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ContractQuery } from '../../+state/contract.query';
+import { ContractDoc } from '../../+state/contract.model';
+import { Observable } from 'rxjs';
+import { ContractService } from 'src/app/services/contract';
 
 @Component({
   selector: 'app-list',
@@ -7,9 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  public contracts$: Observable<ContractDoc[]>;
+
+  constructor(
+    private query: ContractQuery
+  ) { }
 
   ngOnInit() {
+    this.contracts$ = this.query.contracts$;
   }
 
 }
