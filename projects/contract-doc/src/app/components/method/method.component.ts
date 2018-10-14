@@ -1,4 +1,4 @@
-import { MethodDoc, ContractDoc } from './../../models/doc';
+import { MethodDoc, ContractDoc } from '../../+state/contract.model';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({

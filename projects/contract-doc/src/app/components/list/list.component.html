@@ -4,6 +4,10 @@
 
 <section>
   <mat-list *ngFor="let contract of contracts$ | async">
-    <mat-list-item [routerLink]="['', contract.name]">{{ contract.name }}</mat-list-item>
+    <mat-list-item matRipple [routerLink]="['', contract.name]" *ngFor="let contract of contracts$ | async">
+      <h1 mat-line>{{ contract.name }}</h1>
+      <p mat-line *ngIf="contract.title">{{ contract.title }}</p>
+      <mat-divider></mat-divider>
+    </mat-list-item>
   </mat-list>
 </section>

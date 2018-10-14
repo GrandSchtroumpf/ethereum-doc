@@ -1,8 +1,11 @@
-import { ContractStore } from './../../+state/contract.store';
 import { ActivatedRoute } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ContractQuery } from '../../+state/contract.query';
 import { ContractDoc, ABIDefinition } from './../../+state/contract.model';
+import { ContractStore } from './../../+state/contract.store';
+
 import { Observable } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
@@ -20,7 +23,8 @@ export class ViewComponent implements OnInit, OnDestroy {
   constructor(
     private query: ContractQuery,
     private store: ContractStore,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private scroll: ViewportScroller
   ) { }
 
   ngOnInit() {
@@ -28,7 +32,6 @@ export class ViewComponent implements OnInit, OnDestroy {
     this.route.params.pipe(
       takeWhile(() => this.alive),
     ).subscribe(param => {
-      console.log({param});
       this.updateCode(param.name);
       this.store.setActive(param.name);
     });
@@ -36,6 +39,10 @@ export class ViewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.alive = false;
+  }
+
+  public scrollTo(anchor: string) {
+    this.scroll.scrollToAnchor(anchor);
   }
 
   public updateCode(name: string, abi?: ABIDefinition[], bytecode?: string) {

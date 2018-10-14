@@ -10,9 +10,7 @@ export class ContractQuery extends QueryEntity<ContractState, ContractDoc> {
 
   public contracts$ = this.selectAll();
 
-  public activeContract$ = this.selectActive<ContractDoc>().pipe(
-    tap(active => console.log({active}))
-  );
+  public activeContract$ = this.selectActive<ContractDoc>();
 
   constructor(protected store: ContractStore) {
     super(store);
